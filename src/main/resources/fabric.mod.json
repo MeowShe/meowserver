@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "meow-server-s4",
+	"version": "${version}",
+	"name": "Meow Server S4",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/meow-server-s4/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.meowresearch.mcserver.s4.MeowServerS4"
+		],
+		"client": [
+			"io.meowresearch.mcserver.s4.MeowServerS4Client"
+		]
+	},
+	"mixins": [
+		"meow-server-s4.mixins.json",
+		{
+			"config": "meow-server-s4.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
