@@ -2,7 +2,9 @@ package io.meowresearch.mcserver.s4.entity;
 
 import eu.pb4.polymer.core.api.entity.PolymerEntity;
 import io.meowresearch.mcserver.s4.MeowServerS4;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.LookAtEntityGoal;
@@ -16,7 +18,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class GuardEntity extends PathAwareEntity implements PolymerEntity {
 
@@ -38,11 +43,6 @@ public class GuardEntity extends PathAwareEntity implements PolymerEntity {
         // }
     }
 
-    @Override
-    public boolean canImmediatelyDespawn(double distanceSquared) {
-        return false;
-    }
-
     public static DefaultAttributeContainer.Builder createDefenderAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 1024.0)
@@ -54,12 +54,18 @@ public class GuardEntity extends PathAwareEntity implements PolymerEntity {
 
     // Experimental
     // The new method of obtaining the coordinates at the time of entity generation.
+    @Nullable
     @Override
-    public void setPosition(double x, double y, double z) {
-        super.setPosition(x, y, z);
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData) {
+        this.x = this.getX();
+        this.y = this.getY();
+        this.z = this.getZ();
+        return super.initialize(world, difficulty, spawnReason, entityData);
+    }
+
+    @Override
+    public boolean canImmediatelyDespawn(double distanceSquared) {
+        return false;
     }
 
     @Override

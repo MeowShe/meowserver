@@ -3,7 +3,8 @@
   "package": "io.meowresearch.mcserver.s4.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ExampleMixin"
+    "ExampleMixin",
+    "ServerTickMixin"
   ],
   "injectors": {
     "defaultRequire": 1
