@@ -3,7 +3,9 @@ package io.meowresearch.mcserver.s4;
 import eu.pb4.polymer.core.api.entity.PolymerEntityUtils;
 import io.meowresearch.mcserver.s4.entity.GuardEntity;
 import io.meowresearch.mcserver.s4.listener.PlayerJoinListener;
+import io.meowresearch.mcserver.s4.networking.ClientCheckPayload;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -30,6 +32,9 @@ public class MeowServerS4 implements ModInitializer {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
+        PayloadTypeRegistry.playC2S().register(ClientCheckPayload.ID, ClientCheckPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(ClientCheckPayload.ID, ClientCheckPayload.CODEC);
+
         PlayerJoinListener.register();
         PolymerEntityUtils.registerType(NPC);
         FabricDefaultAttributeRegistry.register(NPC, GuardEntity.createDefenderAttributes().build());

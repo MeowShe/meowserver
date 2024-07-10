@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ServerConfig {
 
-    public static String announcement = "对于 Java 版用户，需要安装 Simple Voice Chat mod 以获取地铁站的最佳体验。";
+    public static String announcement = "对于 Java 版用户，我们将在北京时间 2024 年 7 月 11 日 23:59:59 强制要求安装 Meow Client mod，安装 Simple Voice Chat 以获得游戏内最佳体验。";
 
     public static boolean isMaintenanceMode() {
         String maintenance = System.getenv("SERVER_MAINTENANCE");
